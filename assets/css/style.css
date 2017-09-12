@@ -1,0 +1,103 @@
+
+body {
+    background: url('../images/background.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: white;
+    border-radius: 7px;
+    padding: 2rem 1rem;
+    padding-top: 2rem;
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+}
+
+.jumbotron:before {
+    background-image: url("../images/bball.jpg");
+  
+   
+}
+
+#addTrain {
+    padding: 10px;
+
+}
+
+#schedule {
+    border-radius: 7px;
+    
+}
+
+#input {
+    border-radius: 7px;
+    
+}
+
+.train {
+    width: 120px;
+    height: 120px;
+    border: none;
+    
+}
+    
+
+.train img{
+    max-height: 100%;
+    max-width: 100%;
+
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    border: none;
+}
+
+@keyframes train {
+    0% {
+      left: 20%;
+      transform: rotateY(0deg);
+    }
+    49% {
+      transform: rotateY(0deg);
+    }
+    50% {
+      left: 70%;
+      transform: rotateY(180deg);
+    }
+    99% {
+      transform: rotateY(180deg);
+    }
+    100% {
+      left: 20%;
+      transform: rotateY(0deg);
+    }
+  }
+
+ 
+  
+  .train {
+    width: 120px;
+    height: 120px;
+    border: none;
+    
+    position: relative;
+    animation-name: train;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  .train:hover {
+   
+    
+  }
+  

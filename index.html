@@ -1,0 +1,115 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Time</title>
+
+<!------------ jQuery    -------------->  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------------ Bootstrap -------------->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://use.fontawesome.com/9b6420240b.js"></script>
+    
+<!--------- Firebase Reference ---------->      
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+
+</head>
+<body>
+
+    <div class="container">
+
+        <br/>
+
+        <div class="jumbotron">
+            <h1 class="text-center">C'Mon N Ride the Train</h1>
+            <h3 class="text-center">I think I can, I think I can, I think I can, I think I can</h3>
+            <br/>
+           
+            <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/5gEdQ5KpY8Y" frameborder="0" allowfullscreen></iframe> -->
+                <div class="train">
+                    <img src="assets/images/train.png">
+                    
+                </div>
+            <br/>
+                <button type="button" class="btn btn-primary btn-sm" id="play"><i class="fa fa-play" aria-hidden="true"> Play</i></button>
+                
+                <!-- Secondary, outline button -->
+                <button type="button" class="btn btn-secondary btn-sm" id="pause"><i class="fa fa-pause" aria-hidden="true"> Pause</i></button>
+        </div>
+        <div class="card" id="schedule">
+          <div class="card-header">Current Train Schedule</div>
+            <table class="table table-hover" id="trainSchedule">
+                
+                <thead>
+                  <tr>
+                    <th>Train Name</th>
+                    <th>Destination</th>
+                    <th>Frequncy (min)</th>
+                    <th>Next Arrival</th>
+                    <th>Minutes Away</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- <tr>
+                    <td scope="row">Kanye Westbound</td>
+                    <td>Los Angeles</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td scope="row">Durant Trail</td>
+                    <td>Golden State</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td scope="row">Harden Express</td>
+                    <td>Houston</td>
+                    <td>@twitter</td>
+                    <td></td>
+                    <td></td>
+                  </tr> -->
+                </tbody>
+              </table>
+        </div>
+        <br/>
+
+        <div class="card" id="input">
+          <div class="card-header">Add Train</div>
+            <form id="addTrain">
+                <div class="form-group">
+                    <label for="inputTrain" class="col-form-label">Train Name</label>
+                    <input type="text" class="form-control" id="inputTrain">
+                </div>
+                <div class="form-group">
+                    <label for="inputDestination" class="col-form-label">Destination</label>
+                    <input type="text" class="form-control" id="inputDestination">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputTime" class="col-form-label">First Train Time (HH:mm - military time)</label>
+                        <input type="text" class="form-control" id="inputTime" placeholder="HH:MM - military time">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputFrequency" class="col-form-label">Frequncy (min)</label>
+                        <input type="text" class="form-control" id="inputFrequency"></input>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="addTrain">Submit</button>
+            </form>
+        </div>
+        <br/>
+        <br/>
+
+
+    </div>
+    <script src="assets/javascript/app.js"></script>
+    <script src="assets/javascript/moment.js"></script>
+</body>
+</html>
