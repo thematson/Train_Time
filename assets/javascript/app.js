@@ -14,19 +14,8 @@
 
     var database = firebase.database();
 
-    var d = new Date();
-    var nextArr = 0;
-    var minAway = 0;
-    // var newTrainDatas = {
-    //                       newTrain: newTrain,
-    //                       newDest: newDest,
-    //                       newTime: newTime,
-    //                       newFreq: newFreq,
-    //                       nextArr: nextArr,
-    //                       minAway: minAway
-    //                     };
     
-    
+  //play and pause music  
   $('#play').on('click', function() { 
       music.play(); 
   });
@@ -34,33 +23,8 @@
     
   $('#pause').on('click', function() { 
       music.pause(); 
-  });
-
-  // function newTrainData() {
-    // var trainData = {
-    //   newTrain: newTrain,
-    //   newDest: newDest,
-    //   newTime: newTime,
-    //   newFreq: newFreq,
-    //   nextArr: nextArr,
-    //   minAway: minAway
-    // };
-    // console.log(trainData);
-    // console.log('function was called');
-
-    
-
-    // var trainsRef = firebase.database().ref('trains/' + newTrain);
-    // trainsRef.on('child_added', function(data) {
-    //   addTrainElement(trainElement, data.key, data.val().newTrain, 
-    //                   data.val().newDest, data.val().newTime, 
-    //                   data.val().newFreq, data.val().nextArr, data.val().minAway);
-    // });
-    
-
- 
-  
-
+  });  
+//gets user information and pushes it into firebase 
   $('#addTrain').on('click', function() {
       event.preventDefault();    
       var newTrain = $('#inputTrain').val().trim();
@@ -73,60 +37,35 @@
         destination: newDest,
         time: newFirstTime,
         frequency: newFreq
-        // nextarrival: nextArr,
-        // minaway: minAway
-        
       })   
   })
-
+//when new data is added do this
   database.ref().on('child_added', function(snapshot) {
-    
-        console.log(snapshot.val());
-        $('.form-control').val("");     
-        
-        // console.log('newFreq is ' + newFreq);
-        
+    //clears out form
+        $('.form-control').val("");    
+    //variable declarations    
         var thisFreq = snapshot.val().frequency;
-
-
+      //gets time and date from 1 year ago today to avoid erros
         var theDate = moment(snapshot.val().time, 'hh:mm').subtract(1, 'years');
-        console.log('thedate ' + theDate);
         var trainTime = moment(theDate).format('HH:mm');
         var currentTime = moment();
-
         var firstTimeConverted = moment(trainTime,'hh:mm').subtract(1, 'years');
-        console.log('firstimecinv ' + firstTimeConverted);
         var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-        console.log(diffTime);
-        
         var trainRemainder = diffTime % thisFreq;
-
-        console.log("train remainder is " + trainRemainder);
         var trainMinutesAway = thisFreq - trainRemainder;
-        //solved
         var nextTrain = moment().add(trainMinutesAway, 'minutes').format('HH:mm');
-      
-    
+          
         $('#trainSchedule').append('<tr><td>' + snapshot.val().train + 
                                   '</td><td>' + snapshot.val().destination + 
                                   '</td><td>' + snapshot.val().frequency + 
                                   '</td><td>' + nextTrain +
                                   '</td><td>' + trainMinutesAway + '</td></tr>');
-        
   })
-
+//reloads page every minute to updat
   setInterval(function(){
     location.reload();
   }, 60000)
 
-  // database.ref().on('value', function(snapshot){
-
-  //   console.log(snapshot.val());
-
-  //   $('#trainSchedule').append('<tr><td>' + snapshot.val().newTrain + 
-  //                             '</td><td>' + snapshot.val().newDest + 
-  //                             '</td><td>' + snapshot.val().newFreq + '</td></tr>');
-    
-  // });
+ 
 
 
