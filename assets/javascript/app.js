@@ -12,7 +12,9 @@
     };
     firebase.initializeApp(config);
 
+
     var database = firebase.database();
+
 
     
   //play and pause music  
@@ -27,17 +29,20 @@
 //gets user information and pushes it into firebase 
   $('#addTrain').on('click', function() {
       event.preventDefault();    
-      var newTrain = $('#inputTrain').val().trim();
+      var newTrainName = $('#inputTrain').val().trim();
       var newDest = $('#inputDestination').val().trim();
       var newFirstTime =  $('#inputTime').val().trim();
       var newFreq = parseInt($('#inputFrequency').val().trim());
 
-      database.ref().push({
-        train: newTrain,
+      var newTrain = {
+        trainname: newTrainName,
         destination: newDest,
         time: newFirstTime,
         frequency: newFreq
-      })   
+      };
+
+
+      database.ref().push(newTrain);   
   })
 //when new data is added do this
   database.ref().on('child_added', function(snapshot) {
@@ -55,12 +60,15 @@
         var trainMinutesAway = thisFreq - trainRemainder;
         var nextTrain = moment().add(trainMinutesAway, 'minutes').format('HH:mm');
           
-        $('#trainSchedule').append('<tr><td>' + snapshot.val().train + 
+        $('#trainSchedule').append('<tr><td>' + snapshot.val().trainname + 
                                   '</td><td>' + snapshot.val().destination + 
                                   '</td><td>' + snapshot.val().frequency + 
                                   '</td><td>' + nextTrain +
                                   '</td><td>' + trainMinutesAway + '</td></tr>');
-  })
+  }, function(errorObject) {
+    
+          console.log("Errors handled: " + errorObject.code);
+  });
 //reloads page every minute to updat
   setInterval(function(){
     location.reload();
